@@ -1,0 +1,81 @@
+================================================================================
+              GAS AGENCY MANAGEMENT SYSTEM - USER MANUAL
+================================================================================
+
+1. LOGIN
+--------
+When you start the software (RUN.bat), you will see the Admin Login screen.
+
+   Username : Naveen Bishnoi
+   Password : Bhambu2006
+
+You get 3 attempts. Password shows as stars (*) while typing.
+
+2. MAIN MENU OVERVIEW
+---------------------
+   1 - Customer Management    (add/view/edit customers)
+   2 - Cylinder Inventory     (check and update LPG stock)
+   3 - Booking Management     (create and manage orders)
+   4 - Billing Management     (bills, payments, reports)
+   5 - Delivery Management    (deliver cylinders to customers)
+   6 - Admin Dashboard        (business summary)
+   0 - Exit (Logout)
+
+3. ADD A NEW CUSTOMER
+---------------------
+Menu 1 -> Option 1 -> Add Customer
+   - Enter name, 10-digit phone, and full address
+   - Note the Customer ID shown after saving
+
+4. CREATE A BOOKING (ORDER)
+---------------------------
+Menu 3 -> Option 1 -> Create Booking
+   - Enter Customer ID
+   - Select cylinder type (5 KG / 14 KG / 19 KG)
+   - Enter quantity
+   - Stock is automatically reserved
+
+5. DELIVER CYLINDER TO CUSTOMER  *** MAIN DELIVERY WORKFLOW ***
+---------------------------------------------------------------
+Menu 5 -> Delivery Management
+
+   Step A: View Pending Deliveries (Option 1)
+           Shows customer name, phone, ADDRESS, cylinder, and amount
+
+   Step B: Deliver Cylinder to Customer (Option 2)
+           - Enter Booking ID
+           - Verify customer name, phone, and delivery address
+           - Confirm with 'y'
+           - Bill is auto-generated
+           - Delivery slip saved in data\reports\delivery_slip_X.txt
+
+6. COLLECT PAYMENT
+------------------
+Menu 4 -> Option 2 -> Mark Bill as Paid
+   - Enter Bill ID from the delivery/billing screen
+
+7. VIEW REPORTS
+---------------
+   - Dashboard (Menu 6): overall business summary
+   - Revenue Report (Menu 4 -> Option 3)
+   - Export Bills to CSV (Menu 4 -> Option 4)
+
+8. DELIVERY SLIPS
+-----------------
+After each delivery, a slip is saved at:
+   data\reports\delivery_slip_[BookingID].txt
+
+You can print this file for your records or give to the customer.
+
+9. TIPS
+-------
+   - Always add customer with correct address before booking
+   - Use Delivery Management (Menu 5) for daily dispatch work
+   - Check Dashboard at end of day for pending collections
+   - Do not delete customers with pending bookings
+
+10. EXIT
+--------
+Press 0 on main menu to logout safely.
+
+================================================================================

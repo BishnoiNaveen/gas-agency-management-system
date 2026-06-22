@@ -1,0 +1,17 @@
+# Build output
+bin/
+*.exe
+*.o
+
+# Runtime data
+data/
+
+# Debug logs
+debug*.log
+
+# Editor / OS
+.vscode/
+.cursor/
+*.swp
+Thumbs.db
+Desktop.ini

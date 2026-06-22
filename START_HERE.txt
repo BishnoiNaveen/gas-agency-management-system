@@ -1,0 +1,39 @@
+================================================================================
+          GAS AGENCY MANAGEMENT SYSTEM (GAMS) - START HERE
+================================================================================
+
+Welcome! This software helps you manage your gas agency daily operations.
+
+QUICK START
+-----------
+1. Double-click  RUN.bat  to start the software
+2. Login with your admin credentials (see docs\USER_MANUAL.txt)
+3. Follow the on-screen menu
+
+FIRST TIME SETUP
+----------------
+- Windows only requires double-clicking RUN.bat (it builds automatically)
+- If build fails, read docs\INSTALLATION.txt
+
+DAILY WORKFLOW (Cylinder Delivery to Customer)
+----------------------------------------------
+1. Add customer details        (Menu 1)
+2. Create booking/order        (Menu 3)
+3. View pending deliveries     (Menu 5 -> Option 1)
+4. Deliver cylinder to customer (Menu 5 -> Option 2)
+5. Collect payment             (Menu 4 -> Mark Bill as Paid)
+
+DOCUMENTATION
+-------------
+docs\USER_MANUAL.txt     - Step-by-step user guide
+docs\INSTALLATION.txt    - Installation and troubleshooting
+README.md                - Technical project documentation
+
+SUPPORT FILES (auto-created)
+----------------------------
+data\                    - Your business records
+data\reports\            - Delivery slips and CSV exports
+
+================================================================================
+Developed by: Naveen Bishnoi
+================================================================================

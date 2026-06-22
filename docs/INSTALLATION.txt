@@ -1,0 +1,65 @@
+================================================================================
+           GAS AGENCY MANAGEMENT SYSTEM - INSTALLATION GUIDE
+================================================================================
+
+SYSTEM REQUIREMENTS
+-------------------
+- Windows 10 or later
+- GCC compiler (MinGW) - CodeBlocks MinGW OR MinGW-w64
+
+OPTION 1: EASY INSTALL (RECOMMENDED)
+------------------------------------
+1. Install CodeBlocks with MinGW from: https://www.codeblocks.org/
+   OR install MinGW: winget install -e --id mingw-w64
+
+2. Double-click RUN.bat in the project folder
+
+3. On first run, the software builds automatically
+
+OPTION 2: MANUAL BUILD
+----------------------
+1. Open Command Prompt in the project folder
+2. Run:  build.bat
+3. Run:  bin\gas_agency.exe
+
+OPTION 3: DEVELOPER BUILD (Linux/Mac)
+-------------------------------------
+   make
+   make run
+
+FOLDER STRUCTURE AFTER INSTALL
+------------------------------
+gas agency project/
+   RUN.bat              <- Double-click to start
+   START_HERE.txt       <- Quick guide
+   bin/gas_agency.exe   <- Application (created after build)
+   data/                <- Your records (created on first run)
+   docs/                <- User manual and this guide
+
+TROUBLESHOOTING
+---------------
+Problem: "gcc is not recognized"
+Solution: Install CodeBlocks MinGW or MinGW-w64 (see above)
+
+Problem: "Build failed - Permission denied"
+Solution: Close any running gas_agency.exe, then run build.bat again
+
+Problem: "Access Denied" at login
+Solution: Check username and password in USER_MANUAL.txt
+
+Problem: Cannot deliver - customer not found
+Solution: Add customer first in Menu 1
+
+Problem: No pending deliveries
+Solution: Create a booking first in Menu 3
+
+DATA BACKUP
+-----------
+Copy the entire "data" folder regularly to backup:
+   - customers.dat
+   - cylinders.dat
+   - bookings.dat
+   - bills.dat
+   - reports/
+
+================================================================================
