@@ -1,8 +1,30 @@
-# Gas Agency Management System (GAMS)
+# Bishnoi Gas Services
+
+> LPG agency management software — original C console app plus **modern UI** for PC (installable web app) and **Android APK**.
+
+A **complete LPG agency management system** for **Bishnoi Gas Services** — managing customers, cylinder inventory, bookings, billing, and admin operations. Designed as an academic / resume project for **BCA** freshers.
+
+## Quick Start — Modern UI (Recommended)
+
+| Platform | How to run |
+|----------|------------|
+| **Windows PC** | Double-click **`RUN_GAMS_APP.bat`** → opens in browser → click **Install** in Chrome/Edge to pin as desktop app |
+| **Android APK** | Install Android Studio → run **`BUILD_APK.bat`** → open `gams_android` in Android Studio → Build APK |
+| **Flutter (native)** | Double-click **`INSTALL_GAMS_APP.bat`** (downloads Flutter, builds `.exe` + APK) |
+
+**Login:** Username `Naveen Bishnoi` | Password `Bhambu2006`
+
+### What's New (v2.0)
+- Modern Material-style UI with dashboard, cards, and bottom navigation
+- Installable on PC as a Progressive Web App (PWA)
+- Android APK project ready (`gams_android/`)
+- Full Flutter native app (`gams_app/`) for Windows + Android
+
+---
+
+## Original C Console Version
 
 > Console-based LPG agency software in C — customers, inventory, bookings, delivery, billing, and admin dashboard with file-based persistence.
-
-A **complete console-based Gas Agency Management System** built in **C** for managing customers, LPG cylinder inventory, bookings, billing, and admin operations. Designed as an academic / resume project for **BCA** freshers.
 
 [![Language](https://img.shields.io/badge/Language-C99-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](#requirements)

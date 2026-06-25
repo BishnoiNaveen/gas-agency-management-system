@@ -1,0 +1,25 @@
+{
+  "name": "gams-server",
+  "version": "2.2.0",
+  "description": "Bishnoi Gas Services API — MySQL (XAMPP) + bcrypt",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "presync": "node scripts/auto-sync-mysql.js",
+    "sync": "node scripts/auto-sync-mysql.js",
+    "seed": "node scripts/auto-sync-mysql.js --seed",
+    "test": "node --test tests/",
+    "migrate": "node scripts/migrate-to-mysql.js",
+    "migrate:force": "node scripts/migrate-to-mysql.js --force"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "better-sqlite3": "^11.7.0"
+  }
+}

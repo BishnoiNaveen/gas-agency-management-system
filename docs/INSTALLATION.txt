@@ -1,5 +1,5 @@
 ================================================================================
-           GAS AGENCY MANAGEMENT SYSTEM - INSTALLATION GUIDE
+           BISHNOI GAS SERVICES - INSTALLATION GUIDE
 ================================================================================
 
 SYSTEM REQUIREMENTS

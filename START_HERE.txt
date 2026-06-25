@@ -1,38 +1,46 @@
 ================================================================================
-          GAS AGENCY MANAGEMENT SYSTEM (GAMS) - START HERE
+          BISHNOI GAS SERVICES - START HERE
 ================================================================================
 
-Welcome! This software helps you manage your gas agency daily operations.
+PRIMARY APP (Web + API Server)
+------------------------------
+1. Install Node.js LTS from https://nodejs.org
+2. Install XAMPP — start MySQL in XAMPP Control Panel
+3. Create database "bishnoi_gas_service" in phpMyAdmin (if not done)
+4. Double-click  RUN_GAMS_APP.bat  (auto-syncs to MySQL + opens app)
+5. Browser opens http://localhost:3000
+6. Login: Naveen Bishnoi / Bhambu2006
+   Customer: customer / Bhambu2006
+   More customers: ramesh_kumar, priya_sharma, etc. / Bhambu2006
+7. Keep the "GAMS Server" window open while using the app
 
-QUICK START
+RE-LOAD SAMPLE DATA
+-------------------
+  cd gams_server
+  npm run seed
+
+OFFLINE ICONS (optional, once)
+------------------------------
+  cd gams_web
+  npm install
+  npm run vendor
+
+ANDROID APK
 -----------
-1. Double-click  RUN.bat  to start the software
-2. Login with your admin credentials (see docs\USER_MANUAL.txt)
-3. Follow the on-screen menu
+1. Double-click  BUILD_APK.bat
+2. Run  SETUP_GRADLE.bat  (first time)
+3. cd gams_android && gradlew.bat assembleDebug
 
-FIRST TIME SETUP
-----------------
-- Windows only requires double-clicking RUN.bat (it builds automatically)
-- If build fails, read docs\INSTALLATION.txt
-
-DAILY WORKFLOW (Cylinder Delivery to Customer)
-----------------------------------------------
-1. Add customer details        (Menu 1)
-2. Create booking/order        (Menu 3)
-3. View pending deliveries     (Menu 5 -> Option 1)
-4. Deliver cylinder to customer (Menu 5 -> Option 2)
-5. Collect payment             (Menu 4 -> Mark Bill as Paid)
+LEGACY STACKS (reference only - see PLATFORM.md)
+------------------------------------------------
+  RUN.bat           - Original C console app
+  gams_app/         - Flutter (deprecated, admin-only)
 
 DOCUMENTATION
 -------------
-docs\USER_MANUAL.txt     - Step-by-step user guide
-docs\INSTALLATION.txt    - Installation and troubleshooting
-README.md                - Technical project documentation
-
-SUPPORT FILES (auto-created)
-----------------------------
-data\                    - Your business records
-data\reports\            - Delivery slips and CSV exports
+  PLATFORM.md       - Which stack to use
+  gams_server/README.md - API + MySQL (XAMPP) + bcrypt
+  README.md         - Full project overview
 
 ================================================================================
 Developed by: Naveen Bishnoi

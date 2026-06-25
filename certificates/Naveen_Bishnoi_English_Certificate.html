@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificate - Naveen Bishnoi - GDM Institute Abohar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 6mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 285mm;
+      height: 198mm;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #f8f4ec 0%, #fff 40%, #f5f0e6 100%);
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+
+    .certificate {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border: 3px solid #b8860b;
+      outline: 1px solid #1a3a6b;
+      box-shadow: inset 0 0 0 6px #fff, inset 0 0 0 8px #1a3a6b;
+      padding: 22px 40px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .certificate::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(184, 134, 11, 0.45);
+      pointer-events: none;
+    }
+
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 110px;
+      font-weight: 700;
+      color: rgba(26, 58, 107, 0.04);
+      letter-spacing: 12px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .corner {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      z-index: 1;
+    }
+
+    .corner-tl { top: 18px; left: 18px; }
+    .corner-tr { top: 18px; right: 18px; transform: scaleX(-1); }
+    .corner-bl { bottom: 18px; left: 18px; transform: scaleY(-1); }
+    .corner-br { bottom: 18px; right: 18px; transform: scale(-1, -1); }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      margin-bottom: 6px;
+    }
+
+    .emblem {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 3px solid #b8860b;
+      background: linear-gradient(145deg, #1a3a6b, #2d5aa0);
+      color: #f8f4ec;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      line-height: 1.15;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+
+    .header-text {
+      text-align: center;
+    }
+
+    .header-text h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a3a6b;
+      letter-spacing: 4px;
+      line-height: 1;
+    }
+
+    .header-text h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: #b8860b;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .header-text p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 9.5px;
+      color: #555;
+      margin-top: 5px;
+      letter-spacing: 0.3px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0 10px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #b8860b, transparent);
+    }
+
+    .divider-icon {
+      color: #b8860b;
+      font-size: 14px;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .title h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a3a6b;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    .title span {
+      display: block;
+      font-family: "Montserrat", sans-serif;
+      font-size: 9px;
+      color: #888;
+      letter-spacing: 3px;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .body-text {
+      text-align: center;
+      font-family: "Cormorant Garamond", Georgia, serif;
+    }
+
+    .body-text .intro {
+      font-size: 16px;
+      color: #444;
+      font-style: italic;
+    }
+
+    .name {
+      font-size: 36px;
+      font-weight: 700;
+      color: #1a3a6b;
+      margin: 6px 0 4px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .name-underline {
+      width: 320px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #b8860b, #d4af37, #b8860b, transparent);
+      margin: 0 auto 6px;
+    }
+
+    .body-text .completed {
+      font-size: 15px;
+      color: #444;
+    }
+
+    .course {
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a3a6b;
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .mid-section {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      flex: 1;
+      align-items: stretch;
+    }
+
+    .info-box {
+      flex: 1;
+      border: 1px solid rgba(26, 58, 107, 0.2);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px 14px;
+      border-radius: 4px;
+    }
+
+    .info-box h4 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      color: #b8860b;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid rgba(184, 134, 11, 0.3);
+      padding-bottom: 4px;
+    }
+
+    .info-box table {
+      width: 100%;
+      font-family: "Montserrat", sans-serif;
+      font-size: 10px;
+      color: #333;
+      border-collapse: collapse;
+    }
+
+    .info-box td {
+      padding: 3px 0;
+    }
+
+    .info-box td:first-child {
+      color: #666;
+      width: 42%;
+    }
+
+    .info-box td:last-child {
+      font-weight: 600;
+      color: #1a3a6b;
+    }
+
+    .skills-box ul {
+      list-style: none;
+      font-family: "Montserrat", sans-serif;
+      font-size: 9.5px;
+      color: #333;
+      line-height: 1.55;
+    }
+
+    .skills-box li {
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+
+    .skills-box li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: #b8860b;
+      font-weight: bold;
+    }
+
+    .grade-badge {
+      width: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #b8860b;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #fff, #f8f4ec);
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    .grade-badge .grade {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a3a6b;
+      line-height: 1;
+    }
+
+    .grade-badge .label {
+      font-family: "Montserrat", sans-serif;
+      font-size: 7px;
+      color: #b8860b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .footer-section {
+      position: relative;
+      z-index: 2;
+      margin-top: 10px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 10px;
+    }
+
+    .sign-block {
+      text-align: center;
+      width: 220px;
+    }
+
+    .signature-wrap {
+      height: 62px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 4px;
+      border-bottom: 1.5px solid #1a3a6b;
+      margin-bottom: 6px;
+      overflow: visible;
+    }
+
+    .signature-svg {
+      overflow: visible;
+    }
+
+    .signature-svg.director {
+      width: 190px;
+      height: 56px;
+      transform: translateY(3px) rotate(-1deg);
+    }
+
+    .signature-svg.coordinator {
+      width: 178px;
+      height: 56px;
+      transform: translateY(1px) rotate(1.5deg);
+    }
+
+    .signature-svg path,
+    .signature-svg line,
+    .signature-svg ellipse,
+    .signature-svg circle {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sign-details {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .sign-details strong {
+      display: block;
+      font-size: 10px;
+      color: #1a3a6b;
+      font-weight: 600;
+    }
+
+    .sign-details span {
+      display: block;
+      font-size: 8.5px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .stamp-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 4px;
+    }
+
+    .stamp-svg {
+      width: 118px;
+      height: 118px;
+      transform: rotate(-12deg);
+      filter: drop-shadow(0 1px 2px rgba(26, 58, 107, 0.15));
+    }
+
+    .verified {
+      font-family: "Montserrat", sans-serif;
+      font-size: 7px;
+      color: #888;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .bottom-bar {
+      margin-top: 10px;
+      padding: 7px 16px;
+      background: linear-gradient(90deg, #1a3a6b, #2d5aa0, #1a3a6b);
+      border-radius: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Montserrat", sans-serif;
+      font-size: 8.5px;
+      color: #f8f4ec;
+      letter-spacing: 0.5px;
+    }
+
+    .bottom-bar .cert-id {
+      font-weight: 600;
+    }
+
+    .bottom-bar .verify {
+      opacity: 0.85;
+      font-size: 7.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="certificate">
+      <div class="watermark">GDM</div>
+
+      <svg class="corner corner-tl" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2h20v2H4v18H2V2z" fill="#b8860b"/>
+        <path d="M2 2h2v20H2V2z" fill="#1a3a6b"/>
+        <circle cx="8" cy="8" r="2" fill="#b8860b"/>
+      </svg>
+      <svg class="corner corner-tr" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2h20v2H4v18H2V2z" fill="#b8860b"/>
+        <path d="M2 2h2v20H2V2z" fill="#1a3a6b"/>
+        <circle cx="8" cy="8" r="2" fill="#b8860b"/>
+      </svg>
+      <svg class="corner corner-bl" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2h20v2H4v18H2V2z" fill="#b8860b"/>
+        <path d="M2 2h2v20H2V2z" fill="#1a3a6b"/>
+        <circle cx="8" cy="8" r="2" fill="#b8860b"/>
+      </svg>
+      <svg class="corner corner-br" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2h20v2H4v18H2V2z" fill="#b8860b"/>
+        <path d="M2 2h2v20H2V2z" fill="#1a3a6b"/>
+        <circle cx="8" cy="8" r="2" fill="#b8860b"/>
+      </svg>
+
+      <div class="content">
+        <div class="header">
+          <div class="emblem">GDM<br>INST.</div>
+          <div class="header-text">
+            <h1>GDM INSTITUTE</h1>
+            <h2>GDM Educational and Charitable Trust</h2>
+            <p>Street No. 3, Old Suraj Nagari, Abohar, Punjab &ndash; 152116, India &nbsp;|&nbsp; www.gdmedu.org.in &nbsp;|&nbsp; Regd. Under Trust Act</p>
+          </div>
+          <div class="emblem">GDM<br>INST.</div>
+        </div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-icon">&#10022;</div>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="title">
+          <h3>Certificate of Achievement</h3>
+          <span>English Speaking &amp; Communication Skills</span>
+        </div>
+
+        <div class="body-text">
+          <p class="intro">This is to certify that</p>
+          <div class="name">Naveen Bishnoi</div>
+          <div class="name-underline"></div>
+          <p class="completed">has successfully completed the prescribed course of study and assessment in</p>
+          <div class="course">3-Month English Speaking &amp; Communication Skills Program</div>
+        </div>
+
+        <div class="mid-section">
+          <div class="info-box">
+            <h4>Course Details</h4>
+            <table>
+              <tr><td>Duration</td><td>15 Aug 2023 &ndash; 15 Nov 2023</td></tr>
+              <tr><td>Total Period</td><td>3 Months (90 Hours)</td></tr>
+              <tr><td>Level Achieved</td><td>Intermediate</td></tr>
+              <tr><td>Performance</td><td>A &ndash; Excellent</td></tr>
+              <tr><td>Mode of Study</td><td>Classroom &amp; Practical</td></tr>
+            </table>
+          </div>
+
+          <div class="info-box skills-box">
+            <h4>Competencies Acquired</h4>
+            <ul>
+              <li>Spoken English and everyday conversation</li>
+              <li>Pronunciation, fluency, and confidence in speaking</li>
+              <li>Listening comprehension and interactive communication</li>
+              <li>Practical grammar and vocabulary for daily use</li>
+              <li>Public speaking and presentation skills</li>
+            </ul>
+          </div>
+
+          <div class="grade-badge">
+            <div class="grade">A</div>
+            <div class="label">Grade</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer">
+          <div class="sign-block">
+            <div class="signature-wrap">
+              <!-- Bold executive style: angular R, sharp M peaks, fast horizontal strike -->
+              <svg class="signature-svg director" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(4,6) rotate(-7 135 36)">
+                  <ellipse cx="6" cy="58" rx="2.2" ry="1.6" fill="#0a1a35" opacity="0.55"/>
+                  <path d="M8 62 L8 10" stroke="#0a1a35" stroke-width="3.4"/>
+                  <path d="M8 10 C7 4 20 2 27 11 C34 20 25 32 16 29" stroke="#0a1a35" stroke-width="3"/>
+                  <path d="M16 29 L16 62" stroke="#0a1a35" stroke-width="2.8"/>
+                  <path d="M28 40 C36 33 44 46 53 38 C58 34 62 40 66 36" stroke="#0a1a35" stroke-width="2.2" opacity="0.85"/>
+                  <path d="M70 44 L77 18 L84 40 L91 16 L98 42" stroke="#0a1a35" stroke-width="2.7"/>
+                  <path d="M102 40 C115 34 126 48 140 38 C154 28 170 44 186 34 C200 26 216 40 232 30 C244 22 256 28 266 24" stroke="#0a1a35" stroke-width="2.5"/>
+                  <path d="M22 54 C95 48 190 42 268 34" stroke="#0a1a35" stroke-width="2" opacity="0.28"/>
+                  <path d="M266 24 C272 20 276 22 278 26" stroke="#0a1a35" stroke-width="1.5" opacity="0.5"/>
+                  <path d="M53 38 C55 42 57 39" stroke="#0a1a35" stroke-width="1.8" opacity="0.4"/>
+                  <ellipse cx="278" cy="26" rx="1.5" ry="1.2" fill="#0a1a35" opacity="0.45"/>
+                </g>
+              </svg>
+            </div>
+            <div class="sign-details">
+              <strong>Dr. Rajesh Malhotra</strong>
+              <span>Director &amp; Authorized Signatory</span>
+              <span>GDM Institute, Abohar</span>
+            </div>
+          </div>
+
+          <div class="stamp-area">
+            <svg class="stamp-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <path id="outerRing" d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
+                <path id="innerRing" d="M 60,60 m -34,0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0"/>
+              </defs>
+              <circle cx="60" cy="60" r="56" fill="rgba(26,58,107,0.04)" stroke="#1a3a6b" stroke-width="2.5" opacity="0.9"/>
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#1a3a6b" stroke-width="1" opacity="0.7"/>
+              <circle cx="60" cy="60" r="38" fill="none" stroke="#b22234" stroke-width="1.5" opacity="0.75"/>
+              <text fill="#1a3a6b" font-family="Montserrat, sans-serif" font-size="6.2" font-weight="700" letter-spacing="1.2">
+                <textPath href="#outerRing" startOffset="3%">GDM EDUCATIONAL &amp; CHARITABLE TRUST &bull; ABOHAR &bull; PUNJAB &bull;</textPath>
+              </text>
+              <text fill="#b22234" font-family="Montserrat, sans-serif" font-size="5.5" font-weight="600" letter-spacing="0.8">
+                <textPath href="#innerRing" startOffset="8%">REGD. UNDER TRUST ACT &bull; EST. 2015 &bull;</textPath>
+              </text>
+              <circle cx="60" cy="60" r="24" fill="rgba(255,255,255,0.85)" stroke="#1a3a6b" stroke-width="1.5"/>
+              <text x="60" y="54" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#1a3a6b">GDM</text>
+              <text x="60" y="66" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="6.5" font-weight="600" fill="#b22234">INSTITUTE</text>
+              <text x="60" y="76" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="5.5" font-weight="700" fill="#1a3a6b">ABOHAR</text>
+              <polygon points="60,44 62.5,50 69,50 63.5,54 65.5,60 60,56.5 54.5,60 56.5,54 51,50 57.5,50" fill="#b8860b" opacity="0.85"/>
+            </svg>
+            <div class="verified">Verified &amp; Authenticated</div>
+          </div>
+
+          <div class="sign-block">
+            <div class="signature-wrap">
+              <!-- Flowing cursive style: round loops, light strokes, long curling tail -->
+              <svg class="signature-svg coordinator" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(8,4) rotate(3 130 38)">
+                  <path d="M12 54 C12 46 14 30 24 24 C34 18 44 22 42 32 C40 40 30 42 24 40" stroke="#1e4080" stroke-width="1.7"/>
+                  <path d="M44 38 C52 32 58 40 64 34 C70 28 76 36 82 32 C88 28 94 34 98 30" stroke="#1e4080" stroke-width="1.6"/>
+                  <path d="M100 30 L100 44" stroke="#1e4080" stroke-width="1.5"/>
+                  <circle cx="102" cy="25" r="2.4" fill="#1e4080"/>
+                  <path d="M106 42 C114 36 120 44 128 38 C136 32 142 40 150 36" stroke="#1e4080" stroke-width="1.65"/>
+                  <path d="M154 36 C162 28 174 26 178 34 C182 42 170 46 164 40 C170 48 184 50 192 42 C204 32 218 36 228 42" stroke="#1e4080" stroke-width="1.75"/>
+                  <path d="M228 42 C242 38 254 50 264 42 C270 38 274 44 276 50" stroke="#1e4080" stroke-width="1.55"/>
+                  <path d="M276 50 C280 58 270 64 252 60 C228 55 195 54 165 56 C140 58 120 56 105 58" stroke="#1e4080" stroke-width="1.1" opacity="0.38"/>
+                  <path d="M64 34 C66 38 68 35" stroke="#1e4080" stroke-width="1.2" opacity="0.35"/>
+                  <path d="M192 42 C194 46 196 43" stroke="#1e4080" stroke-width="1.1" opacity="0.3"/>
+                  <ellipse cx="276" cy="50" rx="1.4" ry="1.1" fill="#1e4080" opacity="0.4"/>
+                </g>
+              </svg>
+            </div>
+            <div class="sign-details">
+              <strong>Ms. Priya Sharma</strong>
+              <span>Course Coordinator</span>
+              <span>English Speaking Program</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-bar">
+          <span class="cert-id">Certificate No.: GDM/ENG/2023/0847</span>
+          <span class="verify">This certificate is issued upon successful completion of the prescribed curriculum and assessment.</span>
+          <span>Date of Issue: 20 November 2023</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

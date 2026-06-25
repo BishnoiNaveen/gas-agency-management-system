@@ -8,7 +8,7 @@ if not exist "%GCC%" (
     set "GCC=gcc"
 )
 
-echo Building Gas Agency Management System...
+echo Building Bishnoi Gas Services...
 "%GCC%" -Wall -Wextra -std=c99 -Iinclude -o bin\gas_agency.exe ^
     src\main.c src\utils.c src\auth.c src\dashboard.c src\delivery.c src\customer.c src\cylinder.c src\booking.c src\billing.c
 

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#023E8A" />
+  <meta name="description" content="Bishnoi Gas Services - Professional LPG Agency Management" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Bishnoi Gas Services</title>
+  <link rel="stylesheet" href="assets/vendor/dm-sans/400.css" onerror="this.remove()" />
+  <link rel="stylesheet" href="assets/vendor/dm-sans/600.css" onerror="this.remove()" />
+  <link rel="stylesheet" href="assets/vendor/dm-sans/700.css" onerror="this.remove()" />
+  <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css" onerror="this.onerror=null;this.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="server-banner" class="server-banner hidden">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      API server offline — run <strong>RUN_GAMS_APP.bat</strong> (requires <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>)
+    </div>
+    <section id="login-screen" class="screen active">
+      <div class="login-visual">
+        <div class="login-visual-overlay"></div>
+        <img class="login-bg-img" src="https://images.unsplash.com/photo-1581094794329-cd11b84f8f2b?w=1200&q=80" alt="" />
+        <div class="login-brand-block">
+          <div class="brand-logo-inner"><i class="fa-solid fa-fire-flame-curved"></i></div>
+          <h2 class="brand-tagline">Trusted LPG Delivery</h2>
+          <ul class="brand-features">
+            <li><i class="fa-solid fa-tags"></i> Live cylinder price list</li>
+            <li><i class="fa-solid fa-headset"></i> 24/7 complaint & support</li>
+            <li><i class="fa-solid fa-truck-fast"></i> Doorstep LPG delivery</li>
+          </ul>
+        </div>
+      </div>
+      <div class="login-form-side">
+        <div class="login-card" id="login-card">
+          <div class="logo-ring"><i class="fa-solid fa-gas-pump"></i></div>
+          <h1>Bishnoi Gas Services</h1>
+          <p class="subtitle">Professional LPG Agency Management</p>
+
+          <div class="login-tabs">
+            <button type="button" class="login-tab active" data-tab="admin">
+              <i class="fa-solid fa-user-shield"></i> Admin
+            </button>
+            <button type="button" class="login-tab" data-tab="customer">
+              <i class="fa-solid fa-user"></i> Customer
+            </button>
+          </div>
+
+          <!-- Admin Login -->
+          <div id="admin-login-panel">
+            <div class="login-divider"><span>Admin Sign In</span></div>
+            <div class="form-group">
+              <label><i class="fa-regular fa-user"></i> Username</label>
+              <input type="text" id="login-user" placeholder="Naveen Bishnoi" value="Naveen Bishnoi" autocomplete="username" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-lock"></i> Password</label>
+              <input type="password" id="login-pass" placeholder="Enter password" />
+            </div>
+            <p id="login-error" class="error-msg hidden"></p>
+            <button type="button" id="admin-login-btn" class="btn btn-primary btn-block"><i class="fa-solid fa-right-to-bracket"></i> Admin Sign In</button>
+            <p class="forgot-link"><a href="#" id="link-admin-forgot">Forgot password?</a></p>
+            <p class="hint"><i class="fa-solid fa-user-shield"></i> Admin: <strong>Naveen Bishnoi</strong> / <strong>Bhambu2006</strong></p>
+          </div>
+
+          <!-- Admin Forgot Password -->
+          <div id="admin-forgot-panel" class="hidden">
+            <div class="login-divider"><span>Reset Admin Password</span></div>
+            <p class="forgot-hint"><i class="fa-solid fa-key"></i> Verify your identity with username and agency recovery code.</p>
+            <div class="form-group">
+              <label><i class="fa-regular fa-user"></i> Admin Username</label>
+              <input type="text" id="admin-forgot-user" placeholder="Naveen Bishnoi" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-shield-halved"></i> Recovery Code</label>
+              <input type="text" id="admin-forgot-code" placeholder="Agency recovery code" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-lock"></i> New Password</label>
+              <input type="password" id="admin-forgot-new" placeholder="New password (min 4 chars)" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-lock"></i> Confirm Password</label>
+              <input type="password" id="admin-forgot-confirm" placeholder="Confirm new password" />
+            </div>
+            <p id="admin-forgot-error" class="error-msg hidden"></p>
+            <button type="button" id="btn-reset-admin-pass" class="btn btn-primary btn-block"><i class="fa-solid fa-rotate"></i> Reset Password</button>
+            <p class="register-link"><a href="#" id="link-admin-forgot-back">Back to Sign In</a></p>
+            <p class="hint"><i class="fa-solid fa-phone"></i> Need help? Call <a href="tel:9876599999" style="color:var(--green);font-weight:600">9876599999</a></p>
+          </div>
+
+          <!-- Customer Login -->
+          <div id="customer-login-panel" class="hidden">
+            <div class="login-divider"><span>Customer Sign In</span></div>
+            <div class="form-group">
+              <label><i class="fa-regular fa-user"></i> Username</label>
+              <input type="text" id="cust-login-user" placeholder="Your username" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-lock"></i> Password</label>
+              <input type="password" id="cust-login-pass" placeholder="Your password" />
+            </div>
+            <p id="cust-login-error" class="error-msg hidden"></p>
+            <button type="button" id="cust-login-btn" class="btn btn-primary btn-block"><i class="fa-solid fa-right-to-bracket"></i> Customer Sign In</button>
+            <p class="forgot-link"><a href="#" id="link-customer-forgot">Forgot password?</a></p>
+            <p class="register-link">Don't have an account? <a href="#" id="link-show-register">Create Account</a></p>
+            <p class="hint" style="margin-top:12px"><i class="fa-solid fa-user"></i> Demo: <strong>customer</strong> / <strong>Bhambu2006</strong></p>
+            <p class="hint"><i class="fa-solid fa-headset"></i> Help: <a href="tel:9876543210" style="color:var(--green);font-weight:600">9876543210</a> · Complaint: <a href="tel:9876543211" style="color:var(--red);font-weight:600">9876543211</a></p>
+          </div>
+
+          <!-- Customer Forgot Password -->
+          <div id="customer-forgot-panel" class="hidden">
+            <div class="login-divider"><span>Reset Customer Password</span></div>
+            <p class="forgot-hint"><i class="fa-solid fa-mobile-screen"></i> Enter your username and registered 10-digit mobile number.</p>
+            <div class="form-group">
+              <label><i class="fa-solid fa-at"></i> Username</label>
+              <input type="text" id="cust-forgot-user" placeholder="Your username" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-phone"></i> Registered Phone</label>
+              <input type="text" id="cust-forgot-phone" maxlength="10" placeholder="10-digit mobile number" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-lock"></i> New Password</label>
+              <input type="password" id="cust-forgot-new" placeholder="New password (min 4 chars)" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-lock"></i> Confirm Password</label>
+              <input type="password" id="cust-forgot-confirm" placeholder="Confirm new password" />
+            </div>
+            <p id="cust-forgot-error" class="error-msg hidden"></p>
+            <button type="button" id="btn-reset-customer-pass" class="btn btn-primary btn-block"><i class="fa-solid fa-rotate"></i> Reset Password</button>
+            <p class="register-link"><a href="#" id="link-customer-forgot-back">Back to Sign In</a></p>
+          </div>
+
+          <!-- Create Account -->
+          <div id="register-panel" class="hidden">
+            <div class="login-divider"><span>Create Account</span></div>
+            <div class="form-group">
+              <label><i class="fa-regular fa-user"></i> Full Name</label>
+              <input type="text" id="reg-name" placeholder="Your full name" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-at"></i> Username</label>
+              <input type="text" id="reg-username" placeholder="Choose a username" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-lock"></i> Password</label>
+              <input type="password" id="reg-password" placeholder="Choose a password" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-phone"></i> Phone (10 digits)</label>
+              <input type="text" id="reg-phone" maxlength="10" placeholder="9876543210" />
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-location-dot"></i> Delivery Address</label>
+              <textarea id="reg-address" rows="2" placeholder="Full address for cylinder delivery"></textarea>
+            </div>
+            <p id="register-error" class="error-msg hidden"></p>
+            <button type="button" id="btn-register" class="btn btn-primary btn-block"><i class="fa-solid fa-user-plus"></i> Create Account</button>
+            <p class="register-link">Already have an account? <a href="#" id="link-hide-register">Sign In</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="main-screen" class="screen">
+      <div class="page-bg" id="page-bg"></div>
+      <header class="app-header">
+        <div class="header-left">
+          <div class="header-logo"><i class="fa-solid fa-fire-flame-curved"></i></div>
+          <div>
+            <p class="header-agency">Bishnoi Gas Services</p>
+            <h1 id="page-title">Dashboard</h1>
+          </div>
+        </div>
+        <div class="header-right">
+          <span class="admin-chip" id="admin-name"></span>
+          <button type="button" class="icon-btn" id="btn-admin-logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+        </div>
+      </header>
+      <main id="content"></main>
+      <nav class="bottom-nav">
+        <button type="button" class="nav-btn active" data-page="dashboard"><i class="fa-solid fa-gauge-high"></i><span>Home</span></button>
+        <button type="button" class="nav-btn" data-page="customers"><i class="fa-solid fa-users"></i><span>Customers</span></button>
+        <button type="button" class="nav-btn" data-page="inventory"><i class="fa-solid fa-database"></i><span>Stock</span></button>
+        <button type="button" class="nav-btn" data-page="bookings"><i class="fa-solid fa-calendar-check"></i><span>Bookings</span></button>
+        <button type="button" class="nav-btn" data-page="billing"><i class="fa-solid fa-file-invoice-dollar"></i><span>Bills</span></button>
+        <button type="button" class="nav-btn" data-page="delivery"><i class="fa-solid fa-truck"></i><span>Delivery</span></button>
+      </nav>
+    </section>
+
+    <!-- Customer Portal -->
+    <section id="customer-screen" class="screen">
+      <div class="page-bg customer-page-bg" id="customer-page-bg"></div>
+      <header class="app-header customer-header">
+        <div class="header-left">
+          <div class="header-logo customer-logo"><i class="fa-solid fa-fire-flame-simple"></i></div>
+          <div>
+            <p class="header-agency">Bishnoi Gas Services</p>
+            <h1 id="customer-page-title">My Home</h1>
+          </div>
+        </div>
+        <div class="header-right">
+          <span class="admin-chip customer-chip" id="customer-name-chip" style="cursor:pointer" title="My Profile"></span>
+          <button type="button" class="icon-btn" id="btn-customer-logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+        </div>
+      </header>
+      <main id="customer-content"></main>
+      <div id="customer-helpline" class="helpline-strip hidden"></div>
+      <nav class="bottom-nav customer-nav customer-nav-extended">
+        <button type="button" class="nav-btn cust-nav active" data-page="chome"><i class="fa-solid fa-house"></i><span>Home</span></button>
+        <button type="button" class="nav-btn cust-nav" data-page="cprices"><i class="fa-solid fa-tags"></i><span>Prices</span></button>
+        <button type="button" class="nav-btn cust-nav" data-page="cbook"><i class="fa-solid fa-cart-plus"></i><span>Book</span></button>
+        <button type="button" class="nav-btn cust-nav" data-page="cpay"><i class="fa-solid fa-wallet"></i><span>Pay</span></button>
+        <button type="button" class="nav-btn cust-nav" data-page="cbookings"><i class="fa-solid fa-list-check"></i><span>Orders</span></button>
+        <button type="button" class="nav-btn cust-nav" data-page="cservices"><i class="fa-solid fa-handshake"></i><span>Services</span></button>
+        <button type="button" class="nav-btn cust-nav" data-page="csupport"><i class="fa-solid fa-headset"></i><span>Support</span></button>
+      </nav>
+    </section>
+  </div>
+  <div id="modal" class="modal hidden">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-content" id="modal-content">
+      <div id="modal-body"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+  <script src="js/config.js?v=5"></script>
+  <script src="js/api.js?v=5"></script>
+  <script src="js/utils.js?v=5"></script>
+  <script src="app.js?v=5"></script>
+  <script>
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      navigator.serviceWorker.getRegistrations().then(regs => {
+        regs.forEach(r => r.unregister());
+      }).finally(() => {
+        navigator.serviceWorker.register('./sw.js?v=5').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

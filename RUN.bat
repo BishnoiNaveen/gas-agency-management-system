@@ -1,5 +1,5 @@
 @echo off
-title Gas Agency Management System
+title Bishnoi Gas Services
 cd /d "%~dp0"
 
 if not exist bin\gas_agency.exe (

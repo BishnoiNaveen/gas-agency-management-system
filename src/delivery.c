@@ -25,7 +25,7 @@ static void printDeliverySlip(const Booking *booking, const Customer *customer,
     }
 
     fprintf(fp, "================================================\n");
-    fprintf(fp, "           GAS AGENCY DELIVERY SLIP             \n");
+    fprintf(fp, "        BISHNOI GAS SERVICES - DELIVERY SLIP      \n");
     fprintf(fp, "================================================\n");
     fprintf(fp, "Booking ID     : %d\n", booking->id);
     fprintf(fp, "Delivery Date  : %s\n", deliveryDate);

@@ -1,5 +1,12 @@
-# Build output
-bin/
+# Flutter / mobile builds
+tools/flutter/
+gams_app/build/
+gams_app/.dart_tool/
+gams_android/.gradle/
+gams_android/app/build/
+gams_android/local.properties
+release/
+
 *.exe
 *.o
 

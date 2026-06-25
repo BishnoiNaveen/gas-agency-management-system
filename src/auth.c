@@ -6,7 +6,7 @@
 static void printLoginPage(int attempt, int maxAttempts) {
     clearScreen();
     printf("================================================\n");
-    printf("          GAS AGENCY MANAGEMENT SYSTEM          \n");
+    printf("           BISHNOI GAS SERVICES (BGS)           \n");
     printf("                 ADMIN LOGIN PANEL                \n");
     printf("================================================\n");
     printf("\n");
@@ -42,7 +42,7 @@ int adminLogin(void) {
             printf("           LOGIN SUCCESSFUL - WELCOME!            \n");
             printf("================================================\n");
             printf("\n  Admin : %s\n", ADMIN_USERNAME);
-            printf("  Access granted to Gas Agency Management System.\n");
+            printf("  Access granted to Bishnoi Gas Services.\n");
             pauseScreen();
             return 1;
         }

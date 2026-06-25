@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.GAMS" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#023E8A</item>
+        <item name="colorPrimaryDark">#023E8A</item>
+        <item name="colorAccent">#E85D04</item>
+        <item name="android:statusBarColor">#023E8A</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+    </style>
+</resources>

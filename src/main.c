@@ -9,8 +9,8 @@
 
 static void printBanner(void) {
     printf("================================================\n");
-    printf("     GAS AGENCY MANAGEMENT SYSTEM (GAMS)\n");
-    printf("     Console-based Application in C\n");
+    printf("        BISHNOI GAS SERVICES (BGS)\n");
+    printf("     LPG Agency Management System in C\n");
     printf("================================================\n");
     printf("  Admin: %-36s\n", getAdminUsername());
 }
@@ -66,7 +66,7 @@ int main(void) {
                 break;
             case 0:
                 clearScreen();
-                printf("Thank you for using Gas Agency Management System.\n");
+                printf("Thank you for using Bishnoi Gas Services.\n");
                 printf("Logged out successfully. Goodbye, Admin!\n");
                 return 0;
             default:
