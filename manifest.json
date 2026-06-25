@@ -1,0 +1,16 @@
+{
+  "name": "Bishnoi Gas Services",
+  "short_name": "BGS",
+  "description": "Bishnoi Gas Services - LPG Agency Management",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#023E8A",
+  "theme_color": "#023E8A",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23E85D04' width='100' height='100' rx='20'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>G</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
