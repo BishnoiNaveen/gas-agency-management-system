@@ -16,8 +16,8 @@
 <body>
   <div id="app">
     <div id="server-banner" class="server-banner hidden">
-      <i class="fa-solid fa-triangle-exclamation"></i>
-      API server offline — run <strong>RUN_GAMS_APP.bat</strong> (requires <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>)
+      <i class="fa-solid fa-cloud"></i>
+      24/7 Cloud System Active &bull; <strong>Bishnoi Gas Services</strong>
     </div>
     <section id="login-screen" class="screen active">
       <div class="login-visual">
@@ -228,16 +228,19 @@
     </div>
   </div>
   <div id="toast" class="toast hidden"></div>
-  <script src="js/config.js?v=6"></script>
-  <script src="js/api.js?v=6"></script>
-  <script src="js/utils.js?v=6"></script>
-  <script src="app.js?v=6"></script>
+  <script src="js/config.js?v=7"></script>
+  <script src="js/api.js?v=7"></script>
+  <script src="js/utils.js?v=7"></script>
+  <script src="app.js?v=7"></script>
   <script>
-    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(regs => {
-        regs.forEach(r => r.unregister());
-      }).finally(() => {
-        navigator.serviceWorker.register('./sw.js?v=6').catch(() => {});
+        for (const r of regs) { r.unregister(); }
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then(keys => {
+        for (const k of keys) { caches.delete(k); }
       });
     }
   </script>
