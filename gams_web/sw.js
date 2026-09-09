@@ -1,12 +1,12 @@
-const CACHE = 'gams-v5';
+const CACHE = 'gams-v6';
 const ASSETS = [
   './',
   './index.html',
   './styles.css',
-  './js/config.js?v=5',
-  './js/api.js?v=5',
-  './js/utils.js?v=5',
-  './app.js?v=5',
+  './js/config.js?v=6',
+  './js/api.js?v=6',
+  './js/utils.js?v=6',
+  './app.js?v=6',
   './manifest.json',
   './assets/vendor/fontawesome/css/all.min.css',
   './assets/vendor/dm-sans/400.css',
