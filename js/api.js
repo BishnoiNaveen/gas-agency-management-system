@@ -6,17 +6,22 @@ window.GAMS_API = (() => {
   function getBase() {
     if (window.GAMS_CONFIG.API_BASE) return window.GAMS_CONFIG.API_BASE;
     if (window.location.protocol === 'file:') return 'http://localhost:3000';
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return 'http://localhost:3000';
     return '';
   }
 
   async function request(path, options = {}) {
+    const base = getBase();
+    if (!base && (window.location.hostname.includes('github.io') || window.location.protocol === 'https:')) {
+      throw new Error('Running in 24/7 Cloud Client Mode');
+    }
     const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
     if (token) headers.Authorization = `Bearer ${token}`;
     let res;
     try {
-      res = await fetch(`${getBase()}${path}`, { ...options, headers });
+      res = await fetch(`${base}${path}`, { ...options, headers });
     } catch {
-      throw new Error('Cannot reach server — run RUN_GAMS_APP.bat (XAMPP MySQL must be on)');
+      throw new Error('Cannot reach server');
     }
     const body = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(body.error || `HTTP ${res.status}`);
@@ -33,6 +38,10 @@ window.GAMS_API = (() => {
       else localStorage.removeItem(TOKEN_KEY);
     },
     async checkHealth() {
+      const base = getBase();
+      if (!base && (window.location.hostname.includes('github.io') || window.location.protocol === 'https:')) {
+        return false;
+      }
       try {
         await request('/api/health');
         return true;

@@ -119,41 +119,76 @@ var GAMS = (() => {
   };
 
   const defaultData = () => ({
-    customers: [{
-      id: 1,
-      name: 'Demo Customer',
-      phone: '9876543210',
-      address: 'Near Bishnoi Gas Services, Main Road',
-      active: true,
-      username: DEFAULT_CUST_USER,
-    }],
+    customers: [
+      {
+        id: 1,
+        name: 'Demo Customer',
+        phone: '9876543210',
+        address: 'House 12, Near Bishnoi Gas Services, Main Road, Jodhpur',
+        active: true,
+        username: DEFAULT_CUST_USER,
+        password: 'Bhambu2006',
+      },
+      {
+        id: 2,
+        name: 'Ramesh Kumar',
+        phone: '9829012345',
+        address: 'Ward 5, Sardarpura, Jodhpur',
+        active: true,
+        username: 'ramesh_kumar',
+        password: 'Bhambu2006',
+      },
+      {
+        id: 3,
+        name: 'Sunita Devi',
+        phone: '9414056789',
+        address: '42, Ratanada Colony, Jodhpur',
+        active: true,
+        username: 'sunita_devi',
+        password: 'Bhambu2006',
+      },
+    ],
     cylinders: [
       { id: 1, type: 5, filled: 50, empty: 10, price: 450 },
       { id: 2, type: 14, filled: 80, empty: 20, price: 950 },
       { id: 3, type: 19, filled: 60, empty: 15, price: 1150 },
     ],
-    bookings: [],
-    bills: [],
-    complaints: [],
-    payments: [],
-    settings: { adminRecoveryCode: null },
-    nextIds: { customer: 2, booking: 1, bill: 1, complaint: 1, payment: 1 },
+    bookings: [
+      { id: 1, customerId: 1, type: 14, quantity: 1, bookingDate: '08-09-2026', status: 1, deliveryAddress: 'House 12, Near Bishnoi Gas Services, Main Road, Jodhpur', source: 'online', paymentMethod: 'upi', paymentStatus: 'completed', transactionId: 'UPI-DEMO-9912', amount: 950, trackingStatus: 'delivered' },
+      { id: 2, customerId: 2, type: 14, quantity: 1, bookingDate: '09-09-2026', status: 0, deliveryAddress: 'Ward 5, Sardarpura, Jodhpur', source: 'online', paymentMethod: 'cod', paymentStatus: 'pay_on_delivery', transactionId: 'COD-1029', amount: 950, trackingStatus: 'confirmed' },
+    ],
+    bills: [
+      { id: 1, bookingId: 1, customerId: 1, amount: 950, billDate: '08-09-2026', paid: true, paymentMethod: 'upi', transactionId: 'UPI-DEMO-9912', paidDate: '08-09-2026' },
+      { id: 2, bookingId: 2, customerId: 2, amount: 950, billDate: '09-09-2026', paid: false },
+    ],
+    complaints: [
+      { id: 1, customerId: 1, type: 'refill', subject: 'Regulator Inspection', description: 'Request regulator safety inspection on next visit', status: 'pending', date: '09-09-2026' }
+    ],
+    payments: [
+      { id: 1, customerId: 1, amount: 950, method: 'upi', transactionId: 'UPI-DEMO-9912', date: '08-09-2026', type: 'booking' }
+    ],
+    settings: { adminRecoveryCode: DEFAULT_ADMIN_RECOVERY, adminPassword: 'Bhambu2006' },
+    nextIds: { customer: 4, booking: 3, bill: 3, complaint: 2, payment: 2 },
   });
 
   function ensureDefaultCustomer() {
-    const hasDefault = data.customers.some(
+    const defaultCust = data.customers.find(
       c => c.username && c.username.toLowerCase() === DEFAULT_CUST_USER
     );
-    if (!hasDefault) {
+    if (!defaultCust) {
       const id = data.nextIds.customer++;
       data.customers.push({
         id,
         name: 'Demo Customer',
         phone: '9876543210',
-        address: 'Near Bishnoi Gas Services, Main Road',
+        address: 'Near Bishnoi Gas Services, Main Road, Jodhpur',
         active: true,
         username: DEFAULT_CUST_USER,
+        password: 'Bhambu2006',
       });
+      save(data);
+    } else if (!defaultCust.password) {
+      defaultCust.password = 'Bhambu2006';
       save(data);
     }
   }
@@ -221,12 +256,17 @@ var GAMS = (() => {
     if (!data.nextIds.complaint) data.nextIds.complaint = 1;
     if (!data.payments) data.payments = [];
     if (!data.nextIds.payment) data.nextIds.payment = 1;
-    if (!data.settings) data.settings = { adminRecoveryCode: DEFAULT_ADMIN_RECOVERY };
+    if (!data.settings) data.settings = { adminRecoveryCode: DEFAULT_ADMIN_RECOVERY, adminPassword: 'Bhambu2006' };
     if (!API.isApiMode()) ensureDefaultCustomer();
     const banner = document.getElementById('server-banner');
     if (banner) {
-      const healthy = await API.checkHealth().catch(() => false);
-      banner.classList.toggle('hidden', healthy || API.getToken());
+      const isHosted = window.location.hostname.includes('github.io') || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1');
+      if (isHosted) {
+        banner.classList.add('hidden');
+      } else {
+        const healthy = await API.checkHealth().catch(() => false);
+        banner.classList.toggle('hidden', healthy || Boolean(API.getToken()));
+      }
     }
   }
 
@@ -260,14 +300,14 @@ var GAMS = (() => {
       const raw = localStorage.getItem(SESSION_KEY);
       if (!raw) return;
       const s = JSON.parse(raw);
-      if (s.role === 'admin' && API.getToken()) {
+      if (s.role === 'admin') {
         session = { role: 'admin', customerId: null };
         document.getElementById('login-screen').classList.remove('active');
         document.getElementById('main-screen').classList.add('active');
         document.getElementById('customer-screen').classList.remove('active');
         document.getElementById('admin-name').textContent = ADMIN_USER.split(' ')[0];
         nav('dashboard');
-      } else if (s.role === 'customer' && s.customerId && API.getToken()) {
+      } else if (s.role === 'customer' && s.customerId) {
         const customer = data.customers.find(c => c.id === s.customerId && c.active !== false);
         if (!customer) return localStorage.removeItem(SESSION_KEY);
         session = { role: 'customer', customerId: customer.id };
@@ -752,13 +792,21 @@ var GAMS = (() => {
     const confirm = document.getElementById('pw-confirm')?.value || '';
     if (newPw.length < 4) return toast('New password must be at least 4 characters', true);
     if (newPw !== confirm) return toast('New passwords do not match', true);
-    if (API.getToken()) {
+    if (API.isApiMode()) {
       API.changeAdminPassword(current, newPw)
         .then(() => { closeModal(); toast('Admin password updated successfully'); })
         .catch(err => toast(err.message, true));
       return;
     }
-    toast('Connect to server to change password', true);
+    const expectedCurrent = data.settings?.adminPassword || 'Bhambu2006';
+    if (current !== expectedCurrent) {
+      return toast('Current password is incorrect', true);
+    }
+    if (!data.settings) data.settings = {};
+    data.settings.adminPassword = newPw;
+    save(data);
+    closeModal();
+    toast('Admin password updated successfully');
   }
 
   function resolveComplaint(id) {
@@ -1011,7 +1059,7 @@ var GAMS = (() => {
     const confirm = document.getElementById('admin-forgot-confirm')?.value || '';
     const errEl = document.getElementById('admin-forgot-error');
 
-    if (user !== ADMIN_USER) {
+    if (user.toLowerCase() !== ADMIN_USER.toLowerCase() && user.toLowerCase() !== 'admin') {
       errEl.textContent = 'Admin username does not match our records';
       errEl.classList.remove('hidden');
       return;
@@ -1026,19 +1074,37 @@ var GAMS = (() => {
       errEl.classList.remove('hidden');
       return;
     }
-    API.resetAdminPassword(user, code, newPw)
-      .then(() => {
-        toast('Admin password reset successfully! Please sign in.');
-        hideForgotPassword('admin');
-        document.getElementById('login-pass').value = '';
-        errEl.classList.add('hidden');
-        loginAttempts = 0;
-        document.querySelector('#admin-login-btn').disabled = false;
-      })
-      .catch(err => {
-        errEl.textContent = err.message;
-        errEl.classList.remove('hidden');
-      });
+    if (API.isApiMode()) {
+      API.resetAdminPassword(user, code, newPw)
+        .then(() => {
+          toast('Admin password reset successfully! Please sign in.');
+          hideForgotPassword('admin');
+          document.getElementById('login-pass').value = '';
+          errEl.classList.add('hidden');
+          loginAttempts = 0;
+          document.querySelector('#admin-login-btn').disabled = false;
+        })
+        .catch(err => {
+          errEl.textContent = err.message;
+          errEl.classList.remove('hidden');
+        });
+      return;
+    }
+    const validCode = data.settings?.adminRecoveryCode || DEFAULT_ADMIN_RECOVERY;
+    if (code !== validCode) {
+      errEl.textContent = 'Invalid recovery code';
+      errEl.classList.remove('hidden');
+      return;
+    }
+    if (!data.settings) data.settings = {};
+    data.settings.adminPassword = newPw;
+    save(data);
+    toast('Admin password reset successfully! Please sign in.');
+    hideForgotPassword('admin');
+    document.getElementById('login-pass').value = '';
+    errEl.classList.add('hidden');
+    loginAttempts = 0;
+    document.querySelector('#admin-login-btn').disabled = false;
   }
 
   function resetCustomerPassword() {
@@ -1058,19 +1124,36 @@ var GAMS = (() => {
       errEl.classList.remove('hidden');
       return;
     }
-    API.resetCustomerPassword(user, phone, newPw)
-      .then(() => {
-        toast('Password reset successfully! Please sign in.');
-        hideForgotPassword('customer');
-        document.getElementById('cust-login-user').value = user;
-        document.getElementById('cust-login-pass').value = '';
-        errEl.classList.add('hidden');
-        custLoginAttempts = 0;
-      })
-      .catch(err => {
-        errEl.textContent = err.message;
-        errEl.classList.remove('hidden');
-      });
+    if (API.isApiMode()) {
+      API.resetCustomerPassword(user, phone, newPw)
+        .then(() => {
+          toast('Password reset successfully! Please sign in.');
+          hideForgotPassword('customer');
+          document.getElementById('cust-login-user').value = user;
+          document.getElementById('cust-login-pass').value = '';
+          errEl.classList.add('hidden');
+          custLoginAttempts = 0;
+        })
+        .catch(err => {
+          errEl.textContent = err.message;
+          errEl.classList.remove('hidden');
+        });
+      return;
+    }
+    const cust = data.customers.find(c => c.username && c.username.toLowerCase() === user.toLowerCase() && c.phone === phone);
+    if (!cust) {
+      errEl.textContent = 'No matching customer found with this username and phone';
+      errEl.classList.remove('hidden');
+      return;
+    }
+    cust.password = newPw;
+    save(data);
+    toast('Password reset successfully! Please sign in.');
+    hideForgotPassword('customer');
+    document.getElementById('cust-login-user').value = user;
+    document.getElementById('cust-login-pass').value = '';
+    errEl.classList.add('hidden');
+    custLoginAttempts = 0;
   }
 
   function showRegister() {
@@ -1097,14 +1180,46 @@ var GAMS = (() => {
       return;
     }
     const serverUp = await API.checkHealth().catch(() => false);
-    if (!serverUp) {
-      errEl.textContent = 'Server offline — start XAMPP MySQL, then run RUN_GAMS_APP.bat';
-      errEl.classList.remove('hidden');
-      return;
+    if (serverUp) {
+      try {
+        await API.adminLogin(user, pass);
+        data = await API.loadData();
+        session = { role: 'admin', customerId: null };
+        saveSession();
+        document.getElementById('login-screen').classList.remove('active');
+        document.getElementById('main-screen').classList.add('active');
+        document.getElementById('customer-screen').classList.remove('active');
+        document.getElementById('admin-name').textContent = ADMIN_USER.split(' ')[0];
+        nav('dashboard');
+        errEl.classList.add('hidden');
+        loginAttempts = 0;
+        document.querySelector('#admin-login-btn').disabled = false;
+        return;
+      } catch (e) {
+        API.setToken(null);
+        loginAttempts++;
+        if (loginAttempts >= 3) {
+          errEl.textContent = 'Too many failed attempts. Refresh the page (F5) and try again.';
+          errEl.classList.remove('hidden');
+          document.querySelector('#admin-login-btn').disabled = true;
+          return;
+        }
+        const hint = user.toLowerCase() === 'admin'
+          ? 'Use username: Naveen Bishnoi (not "admin")'
+          : 'Use: Naveen Bishnoi / Bhambu2006';
+        errEl.textContent = e.message === 'Invalid credentials'
+          ? `Invalid credentials. ${hint} (Attempt ${loginAttempts}/3)`
+          : (e.message || `Login failed. ${hint}`);
+        errEl.classList.remove('hidden');
+        return;
+      }
     }
-    try {
-      await API.adminLogin(user, pass);
-      data = await API.loadData();
+
+    // Standalone 24/7 Web/Client Mode
+    const expectedPass = data.settings?.adminPassword || 'Bhambu2006';
+    const isUserValid = (user.toLowerCase() === ADMIN_USER.toLowerCase() || user.toLowerCase() === 'admin');
+    if (isUserValid && pass === expectedPass) {
+      API.setToken('gams-local-admin-' + Date.now());
       session = { role: 'admin', customerId: null };
       saveSession();
       document.getElementById('login-screen').classList.remove('active');
@@ -1116,23 +1231,20 @@ var GAMS = (() => {
       loginAttempts = 0;
       document.querySelector('#admin-login-btn').disabled = false;
       return;
-    } catch (e) {
-      API.setToken(null);
-      loginAttempts++;
-      if (loginAttempts >= 3) {
-        errEl.textContent = 'Too many failed attempts. Refresh the page (F5) and try again.';
-        errEl.classList.remove('hidden');
-        document.querySelector('#admin-login-btn').disabled = true;
-        return;
-      }
-      const hint = user.toLowerCase() === 'admin'
-        ? 'Use username: Naveen Bishnoi (not "admin")'
-        : 'Use: Naveen Bishnoi / Bhambu2006';
-      errEl.textContent = e.message === 'Invalid credentials'
-        ? `Invalid credentials. ${hint} (Attempt ${loginAttempts}/3)`
-        : (e.message || `Login failed. ${hint}`);
-      errEl.classList.remove('hidden');
     }
+    API.setToken(null);
+    loginAttempts++;
+    if (loginAttempts >= 3) {
+      errEl.textContent = 'Too many failed attempts. Refresh the page (F5) and try again.';
+      errEl.classList.remove('hidden');
+      document.querySelector('#admin-login-btn').disabled = true;
+      return;
+    }
+    const hint = user.toLowerCase() === 'admin'
+      ? 'Use username: Naveen Bishnoi (not "admin")'
+      : 'Use: Naveen Bishnoi / Bhambu2006';
+    errEl.textContent = `Invalid credentials. ${hint} (Attempt ${loginAttempts}/3)`;
+    errEl.classList.remove('hidden');
   }
 
   async function customerLogin() {
@@ -1145,38 +1257,63 @@ var GAMS = (() => {
       return;
     }
     const serverUp = await API.checkHealth().catch(() => false);
-    if (!serverUp) {
-      errEl.textContent = 'Server offline — start XAMPP MySQL, then run RUN_GAMS_APP.bat';
-      errEl.classList.remove('hidden');
-      return;
+    if (serverUp) {
+      try {
+        const result = await API.customerLogin(user, pass);
+        session = { role: 'customer', customerId: result.customer.id };
+        data = await API.loadData();
+        saveSession();
+        document.getElementById('login-screen').classList.remove('active');
+        document.getElementById('main-screen').classList.remove('active');
+        document.getElementById('customer-screen').classList.add('active');
+        document.getElementById('customer-name-chip').textContent = result.customer.name.split(' ')[0];
+        customerNav('chome');
+        updateHelplineStrip();
+        errEl.classList.add('hidden');
+        custLoginAttempts = 0;
+        return;
+      } catch (e) {
+        API.setToken(null);
+        custLoginAttempts++;
+        if (custLoginAttempts >= 3) {
+          errEl.textContent = 'Too many failed attempts. Refresh the page (F5) and try again.';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        errEl.textContent = e.message === 'Invalid username or password'
+          ? `Invalid username or password. Try: customer / Bhambu2006 (Attempt ${custLoginAttempts}/3)`
+          : (e.message || `Login failed. Attempt ${custLoginAttempts}/3`);
+        errEl.classList.remove('hidden');
+        return;
+      }
     }
-    try {
-      const result = await API.customerLogin(user, pass);
-      session = { role: 'customer', customerId: result.customer.id };
-      data = await API.loadData();
+
+    // Standalone 24/7 Web/Client Mode
+    const cust = data.customers.find(c => c.username && c.username.toLowerCase() === user.toLowerCase() && c.active !== false);
+    const expectedPass = cust?.password || 'Bhambu2006';
+    if (cust && pass === expectedPass) {
+      API.setToken('gams-local-cust-' + cust.id);
+      session = { role: 'customer', customerId: cust.id };
       saveSession();
       document.getElementById('login-screen').classList.remove('active');
       document.getElementById('main-screen').classList.remove('active');
       document.getElementById('customer-screen').classList.add('active');
-      document.getElementById('customer-name-chip').textContent = result.customer.name.split(' ')[0];
+      document.getElementById('customer-name-chip').textContent = cust.name.split(' ')[0];
       customerNav('chome');
       updateHelplineStrip();
       errEl.classList.add('hidden');
       custLoginAttempts = 0;
       return;
-    } catch (e) {
-      API.setToken(null);
-      custLoginAttempts++;
-      if (custLoginAttempts >= 3) {
-        errEl.textContent = 'Too many failed attempts. Refresh the page (F5) and try again.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-      errEl.textContent = e.message === 'Invalid username or password'
-        ? `Invalid username or password. Try: customer / Bhambu2006 (Attempt ${custLoginAttempts}/3)`
-        : (e.message || `Login failed. Attempt ${custLoginAttempts}/3`);
-      errEl.classList.remove('hidden');
     }
+    API.setToken(null);
+    custLoginAttempts++;
+    if (custLoginAttempts >= 3) {
+      errEl.textContent = 'Too many failed attempts. Refresh the page (F5) and try again.';
+      errEl.classList.remove('hidden');
+      return;
+    }
+    errEl.textContent = `Invalid username or password. Try: customer / Bhambu2006 (Attempt ${custLoginAttempts}/3)`;
+    errEl.classList.remove('hidden');
   }
 
   async function registerAccount() {
@@ -1187,6 +1324,11 @@ var GAMS = (() => {
     const address = document.getElementById('reg-address').value.trim();
     const errEl = document.getElementById('register-error');
 
+    function showRegError(msg) {
+      errEl.textContent = msg;
+      errEl.classList.remove('hidden');
+    }
+
     if (!name || !username || !password || !address)
       return showRegError('Please fill all required fields');
     if (!/^\d{10}$/.test(phone)) return showRegError('Phone must be exactly 10 digits');
@@ -1196,21 +1338,40 @@ var GAMS = (() => {
     if (username.toLowerCase() === ADMIN_USER.toLowerCase() || username.toLowerCase() === 'admin')
       return showRegError('This username is reserved');
 
-    try {
-      await API.registerCustomer({ name, username, password, phone, address });
-      toast('Account created! Please sign in.');
-      hideRegister();
-      document.getElementById('cust-login-user').value = username;
-      document.getElementById('cust-login-pass').value = '';
-      errEl.classList.add('hidden');
-    } catch (e) {
-      showRegError(e.message);
+    const serverUp = await API.checkHealth().catch(() => false);
+    if (serverUp) {
+      try {
+        await API.registerCustomer({ name, username, password, phone, address });
+        toast('Account created! Please sign in.');
+        hideRegister();
+        document.getElementById('cust-login-user').value = username;
+        document.getElementById('cust-login-pass').value = '';
+        errEl.classList.add('hidden');
+        return;
+      } catch (e) {
+        return showRegError(e.message);
+      }
     }
 
-    function showRegError(msg) {
-      errEl.textContent = msg;
-      errEl.classList.remove('hidden');
-    }
+    // Standalone 24/7 Web/Client Mode
+    const id = data.nextIds.customer++;
+    const newCust = {
+      id,
+      name,
+      username,
+      password,
+      phone,
+      address,
+      active: true,
+      registeredAt: today(),
+    };
+    data.customers.push(newCust);
+    save(data);
+    toast('Account created! Please sign in.');
+    hideRegister();
+    document.getElementById('cust-login-user').value = username;
+    document.getElementById('cust-login-pass').value = '';
+    errEl.classList.add('hidden');
   }
 
   function logout() {
