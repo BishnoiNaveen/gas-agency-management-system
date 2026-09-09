@@ -954,7 +954,7 @@ var GAMS = (() => {
       const cust = data.customers.find(c => c.id === b.customerId);
       const stock = data.cylinders.find(c => c.type === b.type);
       const amt = stock ? stock.price * b.quantity : 0;
-      const ts = getTrackingStatus(b);
+      const ts = U.getTrackingStatus(b);
       const dispatchBtn = ts === 'confirmed' ? `
         <button class="btn btn-outline btn-block" style="margin-bottom:10px" onclick="GAMS.dispatchBooking(${b.id})">
           <i class="fa-solid fa-truck-fast"></i> Mark Out for Delivery
