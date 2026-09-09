@@ -11,18 +11,26 @@
   <link rel="stylesheet" href="assets/vendor/dm-sans/600.css" onerror="this.remove()" />
   <link rel="stylesheet" href="assets/vendor/dm-sans/700.css" onerror="this.remove()" />
   <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css" onerror="this.onerror=null;this.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(regs) {
+        for (var i = 0; i < regs.length; i++) { regs[i].unregister(); }
+      });
+    }
+    if (window.caches) {
+      caches.keys().then(function(keys) {
+        for (var i = 0; i < keys.length; i++) { caches.delete(keys[i]); }
+      });
+    }
+  </script>
 </head>
 <body>
   <div id="app">
-    <div id="server-banner" class="server-banner hidden">
-      <i class="fa-solid fa-cloud"></i>
-      24/7 Cloud System Active &bull; <strong>Bishnoi Gas Services</strong>
-    </div>
     <section id="login-screen" class="screen active">
       <div class="login-visual">
         <div class="login-visual-overlay"></div>
-        <img class="login-bg-img" src="https://images.unsplash.com/photo-1581094794329-cd11b84f8f2b?w=1200&q=80" alt="" />
+        <img class="login-bg-img" src="https://images.unsplash.com/photo-1581094794329-cd11b84f8f2b?w=1200&q=80" alt="" onerror="this.style.display='none'" />
         <div class="login-brand-block">
           <div class="brand-logo-inner"><i class="fa-solid fa-fire-flame-curved"></i></div>
           <h2 class="brand-tagline">Trusted LPG Delivery</h2>
@@ -228,10 +236,10 @@
     </div>
   </div>
   <div id="toast" class="toast hidden"></div>
-  <script src="js/config.js?v=7"></script>
-  <script src="js/api.js?v=7"></script>
-  <script src="js/utils.js?v=7"></script>
-  <script src="app.js?v=7"></script>
+  <script src="js/config.js?v=8"></script>
+  <script src="js/api.js?v=8"></script>
+  <script src="js/utils.js?v=8"></script>
+  <script src="app.js?v=8"></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(regs => {

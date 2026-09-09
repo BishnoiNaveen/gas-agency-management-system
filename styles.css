@@ -23,15 +23,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 .server-banner {
-  background: #FEF3C7;
-  color: #92400E;
-  padding: 10px 16px;
-  font-size: 13px;
-  text-align: center;
-  border-bottom: 1px solid #FCD34D;
+  display: none !important;
 }
-.server-banner.hidden { display: none; }
-.server-banner a { color: #B45309; font-weight: 600; }
 
 body {
   font-family: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
